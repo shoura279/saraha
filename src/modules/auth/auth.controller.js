@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 import joi from 'joi'
 import jwt from 'jsonwebtoken'
+import asynchadler from "../../utils/asyncHandler.js"
 import { User } from "../../../db/models/user.model.js"
 import { AppError } from "../../utils/appError.js"
 import { sendEmail } from '../../utils/sendEmail.js'
@@ -26,11 +27,8 @@ export const signup = async (req,res,next)=>{
     // ****  todo token muse be otp  ****
     const token = jwt.sign({email},'secretKey')
     sendEmail(email,token)
-}import { User } from "../../../db/models/user.model.js"
-import { AppError } from "../../utils/appError.js"
-import asynchadler from "../../utils/asyncHandler.js"
-import { jwt } from "jsonwebtoken"
-import bcrypt from "bcrypt"
+}
+
 export const login = asynchadler(async(req,res,next)=>{
     
     const {email,password} = req.body
