@@ -11,8 +11,11 @@ password:{
     type:String,
     required:true
 },
-otp:Number
+otp:Number,
+isVerified:{
+    type:Boolean,
+    default:false
+},
 
-})
-
+},{timestamps:true})
 export const User= model('User',userSchema)
