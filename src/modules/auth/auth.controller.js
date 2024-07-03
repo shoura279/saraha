@@ -12,6 +12,10 @@ const authSchema = joi.object({
 })
 
 export const signup = async (req,res,next)=>{
+    const {error} = authSchema.validate(req.body)
+    if(error){
+        next(new AppError(error.details,400))
+    }
     const {email,password} = req.body
     const isExist = await User.findOne({email})
     if(isExist){
