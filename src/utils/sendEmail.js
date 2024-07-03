@@ -21,3 +21,7 @@ export const sendEmail = async(email,otp)=>{
 
   console.log("Message sent: %s", info.messageId);
 }
+
+
+
+

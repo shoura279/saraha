@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import joi from 'joi'
 import jwt from 'jsonwebtoken'
-import asynchadler from "../../utils/asyncHandler.js"
+import {asynchandler} from "../../utils/asyncHandler.js"
 import { User } from "../../../db/models/user.model.js"
 import { AppError } from "../../utils/appError.js"
 import { sendEmail } from '../../utils/sendEmail.js'
@@ -33,12 +33,12 @@ export const signup = asynchadler(async (req,res,next)=>{
     sendEmail(email,token)
 })
 
-export const login = asynchadler(async(req,res,next)=>{
+export const login = asynchandler(async(req,res,next)=>{
     
     const {email,password} = req.body
     const userexist = await User.findOne({email})
     if(!userexist){
-        next(new AppError({message:"user not found",statusCode:404})) 
+        next(new AppError("user not found",404)) 
     }
     const match = bcrypt.compareSync(password,userexist.password)
     if(!match){
