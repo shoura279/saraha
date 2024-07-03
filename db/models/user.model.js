@@ -14,5 +14,4 @@ password:{
 otp:Number
 
 })
-
 export const User= model('User',userSchema)
