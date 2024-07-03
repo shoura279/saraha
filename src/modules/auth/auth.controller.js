@@ -48,3 +48,16 @@ export const login = asynchadler(async(req,res,next)=>{
     return res.statusCode(200).json({message:"login successfully",success:true},accesstoken)
 
 })
+
+
+export const verifyEmail = asynchadler(async(req,res,next)=>{
+
+    const {email, otp} = req.body
+
+    const user =await User.findOneAndUpdate({ email ,otp}, { isVerified: true })
+    if(!user){
+        next(new AppError('Invalied OTP',401))
+    }
+    return res.json({ message: 'your email verified go to login', success: true })
+  
+})
