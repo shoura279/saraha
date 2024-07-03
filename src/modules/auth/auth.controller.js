@@ -12,7 +12,7 @@ const authSchema = joi.object({
     rePassword:joi.string().valid(joi.ref('password')).required()
 })
 
-export const signup = async (req,res,next)=>{
+export const signup = asynchadler(async (req,res,next)=>{
     const {error} = authSchema.validate(req.body)
     if(error){
         next(new AppError(error.details,400))
@@ -31,7 +31,7 @@ export const signup = async (req,res,next)=>{
     // ****  todo token muse be otp  ****
     const token = jwt.sign({email},'secretKey')
     sendEmail(email,token)
-}
+})
 
 export const login = asynchadler(async(req,res,next)=>{
     
